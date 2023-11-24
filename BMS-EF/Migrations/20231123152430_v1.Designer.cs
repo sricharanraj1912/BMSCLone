@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BMS_EF.Migrations
 {
     [DbContext(typeof(BMSDbcontext))]
-    [Migration("20231123063954_b1")]
-    partial class b1
+    [Migration("20231123152430_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,45 +45,32 @@ namespace BMS_EF.Migrations
 
             modelBuilder.Entity("BMS_EF.BookTicket", b =>
                 {
-                    b.Property<int>("ShowNo")
+                    b.Property<int>("BookId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShowNo"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"), 1L, 1);
+
+                    b.Property<string>("Cinema")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("MoviesMovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Seats")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ShowNo")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ShowTimings")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TicketsAvailable")
-                        .HasColumnType("int");
-
-                    b.HasKey("ShowNo");
+                    b.HasKey("BookId");
 
                     b.HasIndex("MoviesMovieId");
 
                     b.ToTable("BookTickets");
-                });
-
-            modelBuilder.Entity("BMS_EF.Cinema", b =>
-                {
-                    b.Property<int>("CinemaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CinemaId"), 1L, 1);
-
-                    b.Property<string>("CinemaAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CinemaName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CinemaId");
-
-                    b.ToTable("Cinemas");
                 });
 
             modelBuilder.Entity("BMS_EF.MakePayment", b =>

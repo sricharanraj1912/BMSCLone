@@ -1,4 +1,5 @@
 ﻿using BMS_EF;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,24 +8,22 @@ using System.Threading.Tasks;
 
 namespace BMS_BL
 {
-    public class BookTickets
+    public class Booktickets
     {
-        int TicketsAvailable {  get; set; }
-         int MovieId {  get; set; }
-       DateTime ShowTimimgs {  get; set; }
-
-        public  bool SeatAvailabale(string mid)
+        static BMSDbcontext dbContext = new BMSDbcontext();
+        public static void bookticket(BMS_EF.BookTicket b)
         {
-            if (TicketsAvailable>=1)
+            dbContext.BookTickets.Add(new BMS_EF.BookTicket()
             {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                Movies = b.Movies,
+                Cinema= b.Cinema,
+                ShowNo= b.ShowNo,
+                Seats= b.Seats,
+                ShowTimings=b.ShowTimings
+               
+            });
+            dbContext.SaveChanges();
         }
-
 
     }
 }

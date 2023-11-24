@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BMS_EF.Migrations
 {
     [DbContext(typeof(BMSDbcontext))]
-    [Migration("20231123111826_b2")]
-    partial class b2
+    [Migration("20231123153139_v2")]
+    partial class v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,22 +45,28 @@ namespace BMS_EF.Migrations
 
             modelBuilder.Entity("BMS_EF.BookTicket", b =>
                 {
-                    b.Property<int>("ShowNo")
+                    b.Property<int>("BookId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShowNo"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"), 1L, 1);
+
+                    b.Property<string>("Cinema")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("MoviesMovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Seats")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ShowNo")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ShowTimings")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TicketsAvailable")
-                        .HasColumnType("int");
-
-                    b.HasKey("ShowNo");
+                    b.HasKey("BookId");
 
                     b.HasIndex("MoviesMovieId");
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BMS_EF.Migrations
 {
-    public partial class b1 : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,20 +21,6 @@ namespace BMS_EF.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Admins", x => x.AdminId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cinemas",
-                columns: table => new
-                {
-                    CinemaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CinemaName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CinemaAddress = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cinemas", x => x.CinemaId);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,15 +56,17 @@ namespace BMS_EF.Migrations
                 name: "BookTickets",
                 columns: table => new
                 {
-                    ShowNo = table.Column<int>(type: "int", nullable: false)
+                    BookId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TicketsAvailable = table.Column<int>(type: "int", nullable: true),
                     MoviesMovieId = table.Column<int>(type: "int", nullable: true),
+                    Cinema = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShowNo = table.Column<int>(type: "int", nullable: true),
+                    Seats = table.Column<int>(type: "int", nullable: true),
                     ShowTimings = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookTickets", x => x.ShowNo);
+                    table.PrimaryKey("PK_BookTickets", x => x.BookId);
                     table.ForeignKey(
                         name: "FK_BookTickets_Movies_MoviesMovieId",
                         column: x => x.MoviesMovieId,
@@ -124,9 +112,6 @@ namespace BMS_EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "BookTickets");
-
-            migrationBuilder.DropTable(
-                name: "Cinemas");
 
             migrationBuilder.DropTable(
                 name: "makePayments");

@@ -12,8 +12,6 @@ namespace BMS_EF
         public string? MovieLang {  get; set; }
         public string? Cinema { get; set; }
 
-
-
     }
     public class RegisterUser
     {
@@ -25,9 +23,14 @@ namespace BMS_EF
     public class BookTicket 
     {
         [Key]
-        public int ShowNo { get; set; }
-        public int? TicketsAvailable { get; set; }
+        public int BookId { get; set; }
+        public RegisterUser? Users {  get; set; }
         public Movie? Movies { get; set; }
+        public string? Cinema { get; set; }
+
+        public int? ShowNo { get; set; }
+        public int? Seats { get; set; }
+        
         public DateTime? ShowTimings { get; set; }
     }
     public class  Admin
@@ -39,13 +42,7 @@ namespace BMS_EF
 
     }
     
-    public class MakePayment
-    {
-        [Key]
-        public int PaymentId { get; set; }
-        public int Amount { get; set; }
-        public RegisterUser users { get; set; }
-    }
+   
 
     public class BMSDbcontext : DbContext
     {
@@ -53,12 +50,12 @@ namespace BMS_EF
         public DbSet<RegisterUser> RegisterUsers { get; set; }
         public DbSet<BookTicket> BookTickets { get; set; }
         public DbSet<Admin> Admins { get; set; }
+       
         
-        public DbSet<MakePayment> makePayments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"server=(localdb)\MSSQLLocalDB;database=BmsDb;trusted_connection=true");
+            optionsBuilder.UseSqlServer(@"server=(localdb)\MSSQLLocalDB;database=Bookms;trusted_connection=true");
         }
 
     }

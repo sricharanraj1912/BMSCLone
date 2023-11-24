@@ -27,15 +27,15 @@ namespace BMS_BL
 
         }
 
-        public static void Update(int id, string movie_name, DateTime rel_date, string movie_lan)
+        public static void Update(int mid, BMS_EF.Movie m)
         {
             var tobeupdated = dbContext.Movies
                    .ToList()
-                   .Where((p) => p.MovieId == id)
+                   .Where((p) => p.MovieId == mid)
                    .FirstOrDefault();
-            tobeupdated.MovieName = movie_name;
-            tobeupdated.ReleaseDate = rel_date;
-            tobeupdated.MovieLang = movie_lan;
+            tobeupdated.MovieName = m.MovieName;
+            tobeupdated.ReleaseDate = m.ReleaseDate;
+            tobeupdated.MovieLang = m.MovieLang;
             dbContext.SaveChanges();
         }
 
