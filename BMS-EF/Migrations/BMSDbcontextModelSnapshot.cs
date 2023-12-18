@@ -52,7 +52,7 @@ namespace BMS_EF.Migrations
                     b.Property<string>("Cinema")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MoviesMovieId")
+                    b.Property<int?>("Movies")
                         .HasColumnType("int");
 
                     b.Property<int?>("Seats")
@@ -64,14 +64,10 @@ namespace BMS_EF.Migrations
                     b.Property<DateTime?>("ShowTimings")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UsersUserId")
+                    b.Property<int?>("Users")
                         .HasColumnType("int");
 
                     b.HasKey("BookId");
-
-                    b.HasIndex("MoviesMovieId");
-
-                    b.HasIndex("UsersUserId");
 
                     b.ToTable("BookTickets");
                 });
@@ -109,8 +105,8 @@ namespace BMS_EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
-                    b.Property<int?>("PhNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
@@ -118,21 +114,6 @@ namespace BMS_EF.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("RegisterUsers");
-                });
-
-            modelBuilder.Entity("BMS_EF.BookTicket", b =>
-                {
-                    b.HasOne("BMS_EF.Movie", "Movies")
-                        .WithMany()
-                        .HasForeignKey("MoviesMovieId");
-
-                    b.HasOne("BMS_EF.RegisterUser", "Users")
-                        .WithMany()
-                        .HasForeignKey("UsersUserId");
-
-                    b.Navigation("Movies");
-
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

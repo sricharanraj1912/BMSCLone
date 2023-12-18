@@ -1,33 +1,39 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BMS_EF
 {
     public class Movie
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MovieId { get; set; }
         public string? MovieName {  get; set; }
         public DateTime? ReleaseDate { get; set; }
         public string? MovieLang {  get; set; }
-        public string? Cinema { get; set; }
 
+        public string? Cinema {  get; set; }
+      
     }
     public class RegisterUser
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string? UserName { get; set; }
-        public int? PhNumber { get; set; }
+        
+        public string? PhNumber { get; set; }
     }
     public class BookTicket 
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookId { get; set; }
-        public RegisterUser? Users {  get; set; }
-        public Movie? Movies { get; set; }
+        public int? Users {  get; set; }
+        public int? Movies { get; set; }
         public string? Cinema { get; set; }
-
+       
         public int? ShowNo { get; set; }
         public int? Seats { get; set; }
         
@@ -36,6 +42,7 @@ namespace BMS_EF
     public class  Admin
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AdminId { get; set; }
         public string? AdminName { get; set; }
         public string? AdminPwd { set; get; }

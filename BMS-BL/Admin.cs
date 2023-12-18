@@ -21,7 +21,8 @@ namespace BMS_BL
             {
                 MovieLang = m.MovieLang,
                 ReleaseDate = m.ReleaseDate,
-                MovieName = m.MovieName
+                MovieName = m.MovieName,
+                Cinema=m.Cinema
             });
             dbContext.SaveChanges();
 
@@ -36,6 +37,7 @@ namespace BMS_BL
             tobeupdated.MovieName = m.MovieName;
             tobeupdated.ReleaseDate = m.ReleaseDate;
             tobeupdated.MovieLang = m.MovieLang;
+            tobeupdated.Cinema = m.Cinema;
             dbContext.SaveChanges();
         }
 

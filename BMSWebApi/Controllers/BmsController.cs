@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using BMS_BL;
 using BMS_EF;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Microsoft.AspNetCore.Cors;
 
 namespace BMSWebApi.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class BmsController : ControllerBase
@@ -39,10 +41,10 @@ namespace BMSWebApi.Controllers
 
         }
         [HttpGet("/search/{mname}")]
-        public IActionResult GetMovie([FromRoute] string mname)
+        public object GetMovie([FromRoute] string mname)
         {
             var movie=BMS_BL.User.Search(mname);
-            return Ok(movie);
+            return movie;
         }
 
         //public IActionResult BookTicket(BMS_EF.BookTicket b) {

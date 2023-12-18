@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BMS_EF.Migrations
 {
     [DbContext(typeof(BMSDbcontext))]
-    [Migration("20231123152430_v1")]
-    partial class v1
+    [Migration("20231214062730_v3")]
+    partial class v3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,7 @@ namespace BMS_EF.Migrations
                     b.Property<string>("Cinema")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MoviesMovieId")
+                    b.Property<int?>("Movies")
                         .HasColumnType("int");
 
                     b.Property<int?>("Seats")
@@ -66,32 +66,12 @@ namespace BMS_EF.Migrations
                     b.Property<DateTime?>("ShowTimings")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("Users")
+                        .HasColumnType("int");
+
                     b.HasKey("BookId");
 
-                    b.HasIndex("MoviesMovieId");
-
                     b.ToTable("BookTickets");
-                });
-
-            modelBuilder.Entity("BMS_EF.MakePayment", b =>
-                {
-                    b.Property<int>("PaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"), 1L, 1);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("usersUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PaymentId");
-
-                    b.HasIndex("usersUserId");
-
-                    b.ToTable("makePayments");
                 });
 
             modelBuilder.Entity("BMS_EF.Movie", b =>
@@ -101,6 +81,9 @@ namespace BMS_EF.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovieId"), 1L, 1);
+
+                    b.Property<string>("Cinema")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MovieLang")
                         .HasColumnType("nvarchar(max)");
@@ -124,8 +107,8 @@ namespace BMS_EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
-                    b.Property<int?>("PhNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
@@ -133,26 +116,6 @@ namespace BMS_EF.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("RegisterUsers");
-                });
-
-            modelBuilder.Entity("BMS_EF.BookTicket", b =>
-                {
-                    b.HasOne("BMS_EF.Movie", "Movies")
-                        .WithMany()
-                        .HasForeignKey("MoviesMovieId");
-
-                    b.Navigation("Movies");
-                });
-
-            modelBuilder.Entity("BMS_EF.MakePayment", b =>
-                {
-                    b.HasOne("BMS_EF.RegisterUser", "users")
-                        .WithMany()
-                        .HasForeignKey("usersUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("users");
                 });
 #pragma warning restore 612, 618
         }
